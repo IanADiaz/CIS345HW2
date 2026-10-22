@@ -534,13 +534,15 @@ procdump(void)
 }
 
 int
-getprocs(void) {
+countprocs(void) {
 	struct proc *p;
 	int count = 0;
 
+	acquire(&ptable.lock);
 	for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-	if(p->state == RUNNABLE || p->state == RUNNING)
-		count++;
+		if(p->state == RUNNABLE || p->state == RUNNING)
+			count++;
 	}
+	release(&ptable.lock);
 	return count;
 }
