@@ -7,8 +7,10 @@ struct proc;
 struct rtcdate;
 struct spinlock;
 struct sleeplock;
+struct qlock;
 struct stat;
 struct superblock;
+
 
 // bio.c
 void            binit(void);
@@ -124,6 +126,11 @@ int		countprocs(void);
 
 // swtch.S
 void            swtch(struct context**, struct context*);
+
+//qlock.c
+void initqlock(struct qlock*, char*);
+void acquireq(struct qlock*);
+void releaseq(struct qlock*);
 
 // spinlock.c
 void            acquire(struct spinlock*);

@@ -6,7 +6,8 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
-
+#include "spinlock.h"
+#include "qlock.h"
 
 int
 sys_fork(void)
@@ -94,4 +95,17 @@ sys_uptime(void)
 int
 sys_getprocs(void) {
 	return countprocs();
+}
+
+struct qlock demoq;
+int shared_counter = 0;
+
+int
+sys_qtest(void)
+{
+	acquireq(&demoq);
+	shared_counter++;
+	cprintf("pid %d in critical section, counter = %d\n", myproc()->pid, shared_counter);
+	releaseq(&demoq);
+	return shared_counter;
 }

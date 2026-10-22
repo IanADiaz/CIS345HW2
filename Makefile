@@ -16,6 +16,7 @@ OBJS = \
 	pipe.o\
 	proc.o\
 	sleeplock.o\
+	qlock.o\
 	spinlock.o\
 	string.o\
 	swtch.o\
@@ -181,6 +182,7 @@ UPROGS=\
 	_usertests\
 	_wc\
 	_zombie\
+	_qtest\
 	_getprocs
 
 fs.img: mkfs README $(UPROGS)
