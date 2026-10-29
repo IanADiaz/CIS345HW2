@@ -1,22 +1,14 @@
 Files Modified:
-- proc.c (Added getprocs(void) to run through process table to count processes)
-- user.h (Added int getprocs(void) user space function to let any program invoke the system call)
-- usys.S (Added SYSCALL(getprocs) stub to set up trap into the kernel and trigger system call number) 
-- sysproc.c (Added sys_getprocs(void) function that acts as a system call)
-- getprocs.c (Created with test program that calls getprocs() to print active processes)
-- syscall.h (Defined system call number)
-- syscall.c (Added SYS_getprocs to system call function pointer table)
-- Makefile (Added getprocs to UPROGS line)
+- defs.h       (added the qlock function declarations)
+- Makefile     (added qlock.o to OBJS and _qtest to UPROGS)
+- sysproc.c    (added a qlock called demoq, a shared_counter, and sys_qtest)
+- main.c       (set up demoq at boot with initqlock)
+- syscall.h    (added SYS_qtest as number 23)
+- syscall.c    (added sys_qtest to the extern list and syscall table)
+- usys.S       (added SYSCALL(qtest))
+- user.h       (added int qtest(void))
  
-Syscall Number Chosen:
-- 22
-
-Example output of running test:
-VNC server running on 127.0.0.1:5900
-xv6...
-cpu0: starting 0
-sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
-init: starting sh
-$ getprocs
-Processes running: 3
-$
+New Files:
+- qlock.h      (has the qlock struct includes a spinlock, a locked flag, and name)
+- qlock.c      (initqlock, acquireq, and releaseq)
+- qtest.c      (test program)
