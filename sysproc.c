@@ -109,3 +109,39 @@ sys_qtest(void)
 	releaseq(&demoq);
 	return shared_counter;
 }
+
+int
+sys_semalloc(void)
+{
+ 	int v;
+  	if(argint(0, &v) < 0)
+    		return -1;
+  	return semalloc(v);
+}
+
+int
+sys_semwait(void)
+{
+  	int id;
+  	if(argint(0, &id) < 0)
+    		return -1;
+  	return semwait(id);
+}
+
+int
+sys_semsignal(void)
+{
+  	int id;
+  	if(argint(0, &id) < 0)
+    		return -1;
+  	return semsignal(id);
+}
+
+int
+sys_semfree(void)
+{
+  	int id;
+  	if(argint(0, &id) < 0)
+    		return -1;
+  	return semfree(id);
+}

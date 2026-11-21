@@ -30,6 +30,7 @@ main(void)
   pinit();         // process table
   tvinit();        // trap vectors
   binit();         // buffer cache
+  seminit();
   fileinit();      // file table
   ideinit();       // disk 
   startothers();   // start other processors

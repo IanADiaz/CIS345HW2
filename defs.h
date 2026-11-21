@@ -124,6 +124,13 @@ void            wakeup(void*);
 void            yield(void);
 int		countprocs(void);
 
+//sem.c
+void		seminit(void);
+int		semalloc(int);
+int		semwait(int);
+int		semsignal(int);
+int		semfree(int);
+
 // swtch.S
 void            swtch(struct context**, struct context*);
 

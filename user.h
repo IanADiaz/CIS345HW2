@@ -25,6 +25,10 @@ int sleep(int);
 int uptime(void);
 int getprocs(void);
 int qtest(void);
+int semalloc(int);
+int semwait(int);
+int semsignal(int);
+int semfree(int);
 
 // ulib.c
 int stat(const char*, struct stat*);

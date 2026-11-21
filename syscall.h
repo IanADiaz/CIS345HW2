@@ -22,4 +22,7 @@
 #define SYS_close  21
 #define SYS_getprocs 22
 #define SYS_qtest 23
-
+#define SYS_semalloc 24
+#define SYS_semwait 25
+#define SYS_semsignal 26
+#define SYS_semfree 27

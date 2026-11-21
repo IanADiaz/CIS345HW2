@@ -105,6 +105,10 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_getprocs(void);
 extern int sys_qtest(void);
+extern int sys_semalloc(void);
+extern int sys_semwait(void);
+extern int sys_semsignal(void);
+extern int sys_semfree(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -130,6 +134,10 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_getprocs] sys_getprocs,
 [SYS_qtest] sys_qtest,
+[SYS_semalloc] sys_semalloc,
+[SYS_semwait] sys_semwait,
+[SYS_semsignal] sys_semsignal,
+[SYS_semfree] sys_semfree
 };
 
 void
