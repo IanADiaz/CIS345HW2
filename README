@@ -1,22 +1,13 @@
 Files Modified:
-- proc.c (Added getprocs(void) to run through process table to count processes)
-- user.h (Added int getprocs(void) user space function to let any program invoke the system call)
-- usys.S (Added SYSCALL(getprocs) stub to set up trap into the kernel and trigger system call number) 
-- sysproc.c (Added sys_getprocs(void) function that acts as a system call)
-- getprocs.c (Created with test program that calls getprocs() to print active processes)
-- syscall.h (Defined system call number)
-- syscall.c (Added SYS_getprocs to system call function pointer table)
-- Makefile (Added getprocs to UPROGS line)
- 
-Syscall Number Chosen:
-- 22
+- def.h  (Added declarations for the 5 kernel semaphore functions)
+- user.h (Added function declarations so user programs can call semaphore operations)
+- usys.S (Added "stubs" for semaphore operations) 
+- sysproc.c (Added 4 handlers that connect system calls to the semaphore functions in sem.c)
+- syscall.h (Added system call number 24-27 for the 4 semaphore system calls)
+- syscall.c (Added the system call handlers)
+- Makefile (Added sem.o to the kernel objects and _semtest to the user programs)
+- main.c (Added seminit() during kernel initialization)
 
-Example output of running test:
-VNC server running on 127.0.0.1:5900
-xv6...
-cpu0: starting 0
-sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
-init: starting sh
-$ getprocs
-Processes running: 3
-$
+New Files Created:
+- sem.c: implements the counting semaphore mechanism inside xv6, uses an array to hold to semaphores. contains 5 functions: seminit(), semalloc(), semwait(), semsignal(), semfree()
+- semtest.c: test program to test the semaphore implementation. uses fork() to create 5 child processes. semalloc(2) limits access to critical section to 2 child processes at a time. semalloc(1) to control access to print statements.
